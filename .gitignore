@@ -1,11 +1,8 @@
-# Byte-compiled / optimized / DLL files
+# Python
 __pycache__/
-*.pyc
-
-# C extensions
+*.py[cod]
+*$py.class
 *.so
-
-# Distribution / packaging
 .Python
 build/
 develop-eggs/
@@ -19,45 +16,30 @@ parts/
 sdist/
 var/
 wheels/
-pip-wheel-metadata/
-share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
-MANIFEST
 
-# Virtual environment
-venv/
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environment
+.env
 .venv/
 env/
-ENV/
+venv/
 
-# Environment variables
-.env
-
-# Session logs (as per your structure)
-logs/
-
-# Database files
-# Crucial for our project to prevent committing the SQLite database
-*.db
-*.db-journal
-*.sqlite
-*.sqlite3
-
-# Test artifacts
-# As per our discussion, we will be using Pytest
-.pytest_cache/
-.tox/
+# Testing
 .coverage
-.coverage.*
-nosetests.xml
-coverage.xml
+.pytest_cache/
+htmlcov/
 
-# IDE / Editor specific
-.idea/
-.vscode/
+# Logs
+*.log
 
-# OS-specific
+# OS
 .DS_Store
 Thumbs.db
