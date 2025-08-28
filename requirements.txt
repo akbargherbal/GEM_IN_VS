@@ -1,3 +1,1 @@
-# Core dependencies
-watchdog>=2.1.0
-# Additional dependencies to be determined during development
+
