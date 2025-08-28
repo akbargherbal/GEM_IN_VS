@@ -1,216 +1,254 @@
-# Gemini CLI VS Code Bridge - Project Tracker v0.1.0
+# Gemini CLI Bridge - Project Tracker v1.0.0
 
-**Last Updated:** 2025-08-27 (Session 1 - Project Initialization)
+**Last Updated:** 2025-08-28 (Session 1 - Project Kickoff)
 
-### **1. Governance and Change Control**
+## **1. Governance and Change Control**
 
-This document serves as the single source of truth for tracking the implementation progress of the Gemini CLI VS Code Bridge. Its structure and tasks are directly derived from the Development Execution Plan (`docs/REFERENCES/DOCUMENT_04.md`).
+This document serves as the single source of truth for tracking the implementation progress of the Gemini CLI VS Code Bridge MVP. Its structure and tasks are directly derived from the Development Execution Plan (`formatted_execution_plan.md`).
 
-**Change Protocol:** The original execution plan is considered the project's constitution. Should a situation arise where a task in this tracker cannot be completed as planned, or a fundamental assumption is proven incorrect, the following protocol will be initiated:
+**Change Protocol:** The original planning document is considered the project's constitution. Should a situation arise where a task in this tracker cannot be completed as planned, or a fundamental assumption is proven incorrect, the following protocol will be initiated:
 
 1. **Proposal:** The AI Assistant will explicitly flag the issue and propose a change to the core plan.
-2. **Impact Analysis:** The AI Assistant will identify which aspects of the execution plan are impacted by the proposed change.
-3. **Approval:** The User (Lead Developer) must approve the change before any implementation proceeds.
-4. **Documentation Update:** Upon approval, the AI Assistant will first provide the updated text for the relevant execution plan sections.
-5. **Tracker Update:** Only after the foundational documents are amended will this Project Tracker be updated to reflect the new plan.
+2. **Impact Analysis:** The AI Assistant will identify which parts of the execution plan are impacted.
+3. **Approval:** The Developer must approve the change before any implementation proceeds.
+4. **Documentation Update:** Upon approval, the execution plan document will be updated first.
+5. **Tracker Update:** Only after the plan is amended will this Project Tracker be updated to reflect the new approach.
 
 This ensures that our project's "law" and its "enforcement" remain in perfect alignment at all times.
 
 ---
 
-### **2. High-Level Status**
+## **2. High-Level Status**
 
-- **Overall Progress:** **0% (Project Initialization)**
-- **Current Phase:** **Phase 0: Critical Validation**
-- **Focus for Current Session:** Environment setup and subprocess communication proof-of-concept
-- **Timeline:** Week 1 of 12-14 week development cycle
-
----
-
-### **3. Phase Progress Overview**
-
-#### **Phase 0: Critical Validation** (`Not Started` - Weeks 1-2)
-- **Goal:** Validate core architecture assumptions before committing to implementation approach
-- **Progress:** 0/4 major tasks completed
-- **Status:** Starting Week 1
-
-#### **Phase 1: Foundation Implementation** (`Pending` - Weeks 3-6)
-- **Goal:** Build core bridge functionality with simplified two-thread architecture
-- **Progress:** 0/5 major tasks completed
-- **Status:** Awaiting Phase 0 completion
-
-#### **Phase 2: Reliability & Production Hardening** (`Pending` - Weeks 7-10)
-- **Goal:** Transform working prototype into production-ready daily-use tool
-- **Progress:** 0/5 major tasks completed
-- **Status:** Awaiting Phase 1 completion
-
-#### **Phase 3: Cross-Platform Validation & Polish** (`Pending` - Weeks 11-12)
-- **Goal:** Ensure production stability across all target platforms
-- **Progress:** 0/4 major tasks completed
-- **Status:** Awaiting Phase 2 completion
-
-#### **Phase 4: Documentation & Production Readiness** (`Pending` - Weeks 13-14)
-- **Goal:** Finalize project for daily production use with complete documentation
-- **Progress:** 0/3 major tasks completed
-- **Status:** Awaiting Phase 3 completion
+- **Overall Progress:** **0% (Project Start)**
+- **Current Phase:** **Phase 1: Core Workflow "Steel Thread" (Week 1)**
+- **Days into Current Phase:** **0/5**
+- **Focus for This Session:** Begin Task P1.T1 - Persistent Gemini CLI Process Launch
+- **Repository Status:** Initial setup required
 
 ---
 
-### **4. Current Phase Detailed Tracking**
+## **3. Phase Checklist**
 
-#### **Phase 0: Critical Validation (Weeks 1-2)**
+### **Phase 1: Core Workflow "Steel Thread" - Week 1 (`In Progress`)**
 
-**Quality Gates:**
-- [ ] Gemini CLI subprocess communication 100% reliable across all platforms
-- [ ] Threading stress test passes 1000+ iterations without deadlocks or memory leaks
-- [ ] Platform compatibility matrix complete with specific configuration requirements
-- [ ] Architecture decision document approved with clear implementation path
-- [ ] Risk mitigation strategies defined for identified platform-specific issues
+**Goal:** Implement the absolute minimum functionality to validate the core user journey: a user can save a prompt in `prompt.md` and see a stateful response appear in `response.md`.
+
+**Entry Criteria:**
+
+- [ ] Python >= 3.8 installed and verified
+- [ ] `gemini` CLI tool installed and authenticated
+- [ ] Initial project structure created (`bridge.py`, `prompt.md`, `response.md`)
+
+**Exit Criteria:**
+
+- [ ] A 5-turn contextual conversation with the `gemini` CLI can be completed successfully using only file edits
+- [ ] All Phase 1 features are implemented and pass basic manual tests
+- [ ] The core logic is contained within a single `bridge.py` script
 
 **Tasks:**
 
-##### **Subprocess Communication Proof-of-Concept** (Est: 3-4 days) `Not Started`
-- **Acceptance Criteria:** Gemini CLI responds reliably to programmatic stdin with various prompt types (simple text, multi-line, special characters, code blocks)
-- **Dependencies:** Gemini CLI installation and API authentication on all platforms
-- **Risk Level:** High - Core architecture viability depends on this validation
-- **Subtasks:**
-  - [ ] Set up development environment with Python 3.8+ on all target platforms
-  - [ ] Install and configure Gemini CLI across Windows, macOS, Linux
-  - [ ] Implement basic subprocess communication test script
-  - [ ] Test 50+ prompt variations with response validation
-  - [ ] Document platform-specific subprocess behaviors
+- [ ] **[P1.T1] Persistent Gemini CLI Process Launch** (Est: 0.5 days)
 
-##### **Threading Model Validation** (Est: 2-3 days) `Not Started`
-- **Acceptance Criteria:** Two-thread model (main + output reader) operates without deadlocks through 1000+ rapid queue operations
-- **Dependencies:** Subprocess PoC completion for realistic testing conditions
-- **Risk Level:** High - Deadlock potential is primary architectural concern
-- **Subtasks:**
-  - [ ] Implement basic two-thread coordination model
-  - [ ] Create bounded queue communication system (maxsize=100)
-  - [ ] Develop automated stress testing framework
-  - [ ] Execute 1000+ rapid iteration tests
-  - [ ] Implement shutdown coordination via threading.Event
+  - **Status:** `Not Started`
+  - **Acceptance Criteria:** The `bridge.py` script successfully starts the `gemini` command as a long-running child process using `subprocess.Popen`. The process's `stdin` and `stdout` are piped.
+  - **Dependencies:** None
+  - **Risk Level:** Low
 
-##### **Cross-Platform Behavior Documentation** (Est: 2-3 days) `Not Started`
-- **Acceptance Criteria:** Platform-specific subprocess configurations and limitations clearly documented
-- **Dependencies:** Subprocess and threading validation completion
-- **Risk Level:** Medium - Required for Phase 1 implementation decisions
-- **Subtasks:**
-  - [ ] Document subprocess startup/shutdown behaviors per platform
-  - [ ] Test file system event handling across platforms
-  - [ ] Identify platform-specific configuration requirements
-  - [ ] Create compatibility matrix with supported OS versions
-  - [ ] Document known limitations and workarounds
+- [ ] **[P1.T2] Input File (`prompt.md`) Monitoring** (Est: 1 day)
 
-##### **Architecture Decision Documentation** (Est: 1-2 days) `Not Started`
-- **Acceptance Criteria:** Final architecture approach selected with technical justification and fallback plans
-- **Dependencies:** All validation tasks completed
-- **Risk Level:** Low - Documentation task but critical for team alignment
-- **Subtasks:**
-  - [ ] Analyze validation results and performance characteristics
-  - [ ] Document chosen architecture with technical rationale
-  - [ ] Define fallback strategy (sequential processing if needed)
-  - [ ] Create implementation roadmap for Phase 1
-  - [ ] Document risk mitigation strategies
+  - **Status:** `Not Started`
+  - **Acceptance Criteria:** The script checks the modification time of `prompt.md` every 200ms. A change is detected reliably.
+  - **Dependencies:** None
+  - **Testing Requirements:** Unit test to verify that a file modification updates the internal state
+
+- [ ] **[P1.T3] Stdin/Stdout Bridging** (Est: 2 days)
+
+  - **Status:** `Not Started`
+  - **Acceptance Criteria:** When a file change is detected, the full content of `prompt.md` is written to the `gemini` process's `stdin`. Data from the process's `stdout` is read in a non-blocking manner.
+  - **Dependencies:** P1.T1, P1.T2
+  - **Risk Level:** Medium - This is where I/O buffering issues may first appear
+
+- [ ] **[P1.T4] Append-Only Output Logging (`response.md`)** (Est: 1 day)
+  - **Status:** `Not Started`
+  - **Acceptance Criteria:** All data read from the `gemini` process's `stdout` is immediately appended to `response.md`. The file is never overwritten.
+  - **Dependencies:** P1.T3
+  - **Testing Requirements:** Unit test to ensure file is opened in append mode and content is written correctly
+
+**Quality Gates:**
+
+- [ ] Manual test: A 5-turn conversation is completed successfully
+- [ ] Code is formatted with `black`
+- [ ] Basic unit tests for file I/O and time checking are written
 
 ---
 
-### **5. Development Environment Setup**
+### **Phase 2: Reliability & Hardening - Week 2 (`Not Started`)**
 
-**Required Components:**
-- [ ] Python 3.8+ installed on all target platforms
-- [ ] Gemini CLI installed and authenticated
-- [ ] Git repository initialized with proper .gitignore
-- [ ] Testing framework (pytest) configured
-- [ ] Cross-platform testing environment access (Windows, macOS, Linux)
+**Goal:** Make the core workflow robust enough for daily, uninterrupted use by handling common errors and edge cases gracefully.
 
-**Repository Structure:**
+**Entry Criteria:**
+
+- [ ] All Phase 1 Exit Criteria are met
+- [ ] A functional "steel thread" prototype is committed to the `develop` branch
+
+**Exit Criteria:**
+
+- [ ] The bridge automatically restarts the `gemini` process if it crashes
+- [ ] The script handles file creation and exits cleanly on `Ctrl+C`
+- [ ] The tool is verified to work on Windows and a primary Linux/macOS environment
+- [ ] Test coverage reaches at least 60%
+
+**Tasks:**
+
+- [ ] **[P2.T1] Process Crash Detection & Restart** (Est: 2 days)
+
+  - **Status:** `Not Started`
+  - **Acceptance Criteria:** The main loop checks `process.poll()`. If the process has terminated, it is restarted. Implement a simple backoff delay (e.g., 2s, 4s, 8s) for restarts. After 3 failed attempts, the script exits with an error.
+  - **Dependencies:** Phase 1 implementation
+  - **Risk Level:** Medium - Logic can be tricky to test effectively
+
+- [ ] **[P2.T2] Graceful Shutdown (Ctrl+C)** (Est: 1 day)
+
+  - **Status:** `Not Started`
+  - **Acceptance Criteria:** Wrapping the main loop in a `try...finally` block ensures the child `gemini` process is terminated when the bridge script is stopped with `Ctrl+C`. No orphaned processes are left.
+  - **Dependencies:** Phase 1 implementation
+  - **Testing Requirements:** Manual test is required to verify process termination
+
+- [ ] **[P2.T3] Automatic File Creation & UTF-8 Support** (Est: 1 day)
+
+  - **Status:** `Not Started`
+  - **Acceptance Criteria:** On startup, the script checks for `prompt.md` and `response.md` and creates them if they don't exist. All file I/O and subprocess communication explicitly uses `encoding='utf-8'`.
+  - **Dependencies:** None
+  - **Testing Requirements:** Unit test with a temporary directory to verify file creation. Test with non-ASCII characters
+
+- [ ] **[P2.T4] Cross-Platform Validation** (Est: 1 day)
+  - **Status:** `Not Started`
+  - **Acceptance Criteria:** The full user journey is tested and confirmed to be working on both Windows and a Unix-like system (macOS or Linux).
+  - **Dependencies:** All other Phase 2 tasks
+  - **Risk Level:** Medium - This is the primary mitigation for the `stdout` buffering risk
+
+**Quality Gates:**
+
+- [ ] All unit tests passing with >60% coverage
+- [ ] Code review completed and approved
+- [ ] Manual testing checklist for crash recovery and shutdown completed on target platforms
+
+---
+
+### **Phase 3: Documentation & Release - Week 3 (`Not Started`)**
+
+**Goal:** Finalize the tool for public use with clear documentation, high-quality code, and robust test coverage.
+
+**Entry Criteria:**
+
+- [ ] All Phase 2 Exit Criteria are met
+- [ ] The tool is stable and functionally complete for the MVP scope
+
+**Exit Criteria:**
+
+- [ ] A clear `README.md` is written with setup and usage instructions
+- [ ] Code is well-commented, especially the polling and subprocess logic
+- [ ] Final test coverage is >= 85%
+- [ ] A startup confirmation message is implemented
+
+**Tasks:**
+
+- [ ] **[P3.T1] Increase Test Coverage to >= 85%** (Est: 2 days)
+
+  - **Status:** `Not Started`
+  - **Acceptance Criteria:** Write `pytest` tests for process restart logic, edge cases in file handling, and error conditions. Use `pytest-mock` to isolate components.
+  - **Dependencies:** All code from Phase 1 & 2
+
+- [ ] **[P3.T2] Write `README.md`** (Est: 1 day)
+
+  - **Status:** `Not Started`
+  - **Acceptance Criteria:** The `README` includes a project summary, setup steps, usage instructions (the side-by-side editor workflow), and a troubleshooting section. A new user can be operational in under 5 minutes.
+  - **Dependencies:** None
+
+- [ ] **[P3.T3] Code Cleanup and Commenting** (Est: 1 day)
+  - **Status:** `Not Started`
+  - **Acceptance Criteria:** Add inline comments explaining complex parts (e.g., non-blocking reads, restart backoff). Ensure all code adheres to `black` and `pylint` standards. Implement the "Startup Confirmation Message" feature.
+  - **Dependencies:** All code from Phase 1 & 2
+
+**Quality Gates:**
+
+- [ ] All unit tests passing with >=85% coverage
+- [ ] `README.md` is reviewed by a peer for clarity
+- [ ] Final manual test of the full user journey using only the `README` for instructions
+
+---
+
+## **4. Risk Tracker**
+
+### **High-Risk Areas Requiring Special Attention**
+
+#### **Active Risks**
+
+- **🔴 HIGH: Subprocess I/O Buffering** - Different operating systems buffer `stdout` from child processes differently
+
+  - **Mitigation:** Test on both Windows and macOS/Linux early in Phase 2
+  - **Status:** Monitoring
+
+- **🟡 MEDIUM: `gemini` CLI Instability** - The external tool may crash frequently or have breaking changes
+  - **Mitigation:** Process restart logic in Phase 2 is the primary defense
+  - **Status:** Monitoring
+
+#### **Resolved Risks**
+
+- None yet
+
+---
+
+## **5. Session Management**
+
+### **Quick Session Startup Guide**
+
+Copy this context for LLM sessions:
+
 ```
-gemini-vscode-bridge/
-├── src/
-│   ├── bridge/
-│   │   ├── __init__.py
-│   │   ├── main.py
-│   │   ├── subprocess_manager.py
-│   │   ├── file_watcher.py
-│   │   ├── thread_coordinator.py
-│   │   ├── config.py
-│   │   └── error_handler.py
-│   └── utils/
-│       ├── __init__.py
-│       ├── platform_config.py
-│       ├── logging_setup.py
-│       └── validation.py
-├── tests/
-│   ├── unit/
-│   ├── integration/
-│   └── fixtures/
-├── docs/
-│   ├── user_guide.md
-│   ├── developer_guide.md
-│   ├── troubleshooting.md
-│   ├── api_reference.md
-│   └── PROJECT_TRACKER.md  # This file
-├── config/
-│   ├── default.env
-│   └── platform_specific/
-└── scripts/
-    ├── install.py
-    ├── validate_setup.py
-    └── performance_test.py
+Project: Gemini CLI VS Code Bridge
+Current Phase: Phase 1 (Week 1) - Core Workflow
+Current Task: [Check tracker for current task status]
+Tech Stack: Python 3.8+, subprocess, file monitoring
+Goal: Build a bridge that monitors prompt.md and streams gemini CLI responses to response.md
 ```
 
----
+### **End-of-Session Checklist**
 
-### **6. Risk Monitoring**
-
-**High-Risk Areas Currently Under Observation:**
-
-#### **Threading Coordination Deadlocks** - Risk Level: HIGH
-- **Status:** Not yet tested
-- **Early Warning Signs to Watch:** Thread join operations >5 seconds, queue blocking during shutdown, memory growth, increasing response times
-- **Mitigation Ready:** Timeout mechanisms, bounded queues, deadlock detection, sequential fallback
-
-#### **Cross-Platform Subprocess Variations** - Risk Level: HIGH
-- **Status:** Not yet tested
-- **Early Warning Signs to Watch:** Platform-specific test failures, different response times, encoding/path issues, orphan processes
-- **Mitigation Ready:** Platform-specific config layer, automated cross-platform testing, platform-aware recovery
-
-#### **Gemini CLI External Dependency Stability** - Risk Level: MEDIUM
-- **Status:** Not yet tested
-- **Early Warning Signs to Watch:** Increased API response times, timeout errors, format changes, auth errors
-- **Mitigation Ready:** Retry logic with exponential backoff, clear error messages, service status monitoring
+- [ ] Update task statuses (Not Started → In Progress → Complete)
+- [ ] Mark any completed quality gates
+- [ ] Note any blockers or issues discovered
+- [ ] Commit all changes with conventional commit messages
+- [ ] Update "Last Updated" timestamp at top of this file
 
 ---
 
-### **7. Success Metrics**
+## **6. Development Environment Status**
 
-**Technical Success Criteria (MVP):**
-- [ ] All 6 MVP Core features implemented and tested
-- [ ] Core user journey completable without terminal interaction
-- [ ] Sub-500ms latency from save to stdin write
-- [ ] Memory usage <50MB during 8-hour sessions
-- [ ] 48-hour continuous operation without deadlocks
-- [ ] Graceful shutdown within 5 seconds
+### **Repository Structure**
 
-**Quality Assurance Targets:**
-- [ ] 95%+ unit test coverage for threading logic
-- [ ] 90%+ unit test coverage for subprocess management
-- [ ] 100% integration test pass rate on all platforms
-- [ ] Complete pre-production checklist validation
+```
+gemini-bridge/
+├── PROJECT_TRACKER.md     # This file (✅)
+├── .gitignore            # Status: [Needs Creation]
+├── bridge.py             # Status: [Needs Creation]
+├── prompt.md             # Status: [Auto-created by bridge.py]
+├── response.md           # Status: [Auto-created by bridge.py]
+├── README.md             # Status: [Phase 3 Task]
+├── requirements.txt      # Status: [Needs Creation]
+└── tests/
+    └── test_bridge.py    # Status: [Phase 1 Task]
+```
+
+### **Development Dependencies**
+
+- [ ] Python 3.8+ verified
+- [ ] `gemini` CLI tool installed
+- [ ] `pytest` for testing
+- [ ] `black` for formatting
+- [ ] `pytest-mock` for mocking
 
 ---
 
-### **8. Session Handover Notes**
-
-**For Next Session:**
-- Begin Phase 0 Critical Validation
-- Set up development environment on primary platform
-- Start Subprocess Communication Proof-of-Concept implementation
-- Focus on validating Gemini CLI programmatic interaction reliability
-
-**Current Blockers:** None identified
-
-**Decisions Pending:** None at project initialization
-
-**Architecture Notes:** Two-thread coordination model planned but requires validation in Phase 0 before commit
+**Next Session TODO:** Begin Phase 1, Task P1.T1 - Set up the basic project structure and implement the persistent Gemini CLI process launch.
