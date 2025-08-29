@@ -4,7 +4,7 @@
 
 ## **1. Governance and Change Control**
 
-This document serves as the single source of truth for tracking the implementation progress of the Gemini CLI VS Code Bridge MVP. Its structure and tasks are directly derived from the Development Execution Plan (`formatted_execution_plan.md`).
+This document serves as the single source of truth for tracking the implementation progress of the Gemini CLI VS Code Bridge MVP. Its structure and tasks are directly derived from the Development Execution Plan (`DOCUMENT_04.md`).
 
 **Change Protocol:** The original planning document is considered the project's constitution. Should a situation arise where a task in this tracker cannot be completed as planned, or a fundamental assumption is proven incorrect, the following protocol will be initiated:
 
@@ -96,8 +96,8 @@ This ensures that our project's "law" and its "enforcement" remain in perfect al
 
 - [ ] The bridge automatically restarts the `gemini` process if it crashes
 - [ ] The script handles file creation and exits cleanly on `Ctrl+C`
-- [ ] The tool is verified to work on Windows and a primary Linux/macOS environment
-- [ ] Test coverage reaches at least 60%
+- [ ] The tool is verified to work on a **primary Linux environment**. Validation on Windows is optional.
+- [ ] Test coverage reaches at least 60%.
 
 **Tasks:**
 
@@ -124,13 +124,13 @@ This ensures that our project's "law" and its "enforcement" remain in perfect al
 
 - [ ] **[P2.T4] Cross-Platform Validation** (Est: 1 day)
   - **Status:** `Not Started`
-  - **Acceptance Criteria:** The full user journey is tested and confirmed to be working on both Windows and a Unix-like system (macOS or Linux).
+  - **Acceptance Criteria:** The full user journey is tested and confirmed to be working on **Linux**. The journey should also be validated on Windows if time permits.
   - **Dependencies:** All other Phase 2 tasks
   - **Risk Level:** Medium - This is the primary mitigation for the `stdout` buffering risk
 
 **Quality Gates:**
 
-- [ ] All unit tests passing with >60% coverage
+- [ ] All unit tests passing with >=60% coverage
 - [ ] Code review completed and approved
 - [ ] Manual testing checklist for crash recovery and shutdown completed on target platforms
 
@@ -187,7 +187,7 @@ This ensures that our project's "law" and its "enforcement" remain in perfect al
 
 - **🔴 HIGH: Subprocess I/O Buffering** - Different operating systems buffer `stdout` from child processes differently
 
-  - **Mitigation:** Test on both Windows and macOS/Linux early in Phase 2
+  - **Mitigation:** Test on both Linux and Windows early in Phase 2, with Linux being the priority.
   - **Status:** Monitoring
 
 - **🟡 MEDIUM: `gemini` CLI Instability** - The external tool may crash frequently or have breaking changes
