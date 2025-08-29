@@ -20,10 +20,10 @@ This ensures that our project's "law" and its "enforcement" remain in perfect al
 
 ## **2. High-Level Status**
 
-- **Overall Progress:** **0% (Project Start)**
+- **Overall Progress:** **30%**
 - **Current Phase:** **Phase 1: Core Workflow "Steel Thread" (Week 1)**
 - **Days into Current Phase:** **0/5**
-- **Focus for This Session:** Begin Task P1.T1 - Persistent Gemini CLI Process Launch
+- **Focus for This Session:** Begin Task P1.T3 - Stdin/Stdout Bridging
 - **Repository Status:** Initial setup required
 
 ---
@@ -48,16 +48,16 @@ This ensures that our project's "law" and its "enforcement" remain in perfect al
 
 **Tasks:**
 
-- [ ] **[P1.T1] Persistent Gemini CLI Process Launch** (Est: 0.5 days)
+- [x] **[P1.T1] Persistent Gemini CLI Process Launch** (Est: 0.5 days)
 
-  - **Status:** `Not Started`
+  - **Status:** `Complete`
   - **Acceptance Criteria:** The `bridge.py` script successfully starts the `gemini` command as a long-running child process using `subprocess.Popen`. The process's `stdin` and `stdout` are piped.
   - **Dependencies:** None
   - **Risk Level:** Low
 
-- [ ] **[P1.T2] Input File (`prompt.md`) Monitoring** (Est: 1 day)
+- [x] **[P1.T2] Input File (`prompt.md`) Monitoring** (Est: 1 day)
 
-  - **Status:** `Not Started`
+  - **Status:** `Complete`
   - **Acceptance Criteria:** The script checks the modification time of `prompt.md` every 200ms. A change is detected reliably.
   - **Dependencies:** None
   - **Testing Requirements:** Unit test to verify that a file modification updates the internal state
